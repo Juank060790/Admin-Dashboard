@@ -15,7 +15,7 @@ import LoginPage from "../../containers/Login/LoginPage";
 
 const Layout = () => {
   const themeReducer = useSelector((state) => state.ThemeReducer);
-  const isAuthenticated = false;
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const dispatch = useDispatch();
 
@@ -31,9 +31,11 @@ const Layout = () => {
 
   return (
     <BrowserRouter>
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
+        <Route path="/" component={LoginPage}></Route>
+      ) : (
         <Route
-          path="/dashboard"
+          path="/"
           render={(props) => (
             <div
               className={`layout ${themeReducer.mode} ${themeReducer.color}`}
@@ -48,8 +50,6 @@ const Layout = () => {
             </div>
           )}
         />
-      ) : (
-        <Route path="/" component={LoginPage}></Route>
       )}
     </BrowserRouter>
   );

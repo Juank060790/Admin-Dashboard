@@ -1,12 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-
-import { createStore } from "redux";
-
 import { Provider } from "react-redux";
-
-import rootReducer from "./redux/reducers";
 
 import "./assets/boxicons-2.0.7/css/boxicons.min.css";
 import "./assets/css/grid.css";
@@ -14,16 +9,15 @@ import "./assets/css/theme.css";
 import "./assets/css/index.css";
 
 import Layout from "./components/layout/Layout";
+import configureStore from "./redux/store";
 
-const store = createStore(rootReducer);
+const store = configureStore();
 
 document.title = "Shop Dashboard";
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <Layout />
-    </React.StrictMode>
+    <Layout />
   </Provider>,
   document.getElementById("root")
 );
