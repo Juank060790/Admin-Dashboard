@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import Table from "../components/table/Table";
 
-import customerListJSON from "../assets/JsonData/customers-list.json";
+// import customerListJSON from "../assets/JsonData/customers-list.json";
 
 import { UserList } from "../assets/FakeData/UserList";
 import { useDispatch } from "react-redux";
@@ -35,7 +35,7 @@ const renderBody = (item, index) => (
     <td>{item.name}</td>
     <td>{item.email}</td>
     <td>{item.phone}</td>
-    <td>{item.total_orders}</td>
+    <td>{item.total_order}</td>
     <td>{item.total_spend}</td>
     <td>{item.location}</td>
   </tr>
@@ -45,7 +45,7 @@ const renderBody = (item, index) => (
 
 const Customers = () => {
   const customerList = useSelector((state) => state.users.customers);
-  console.log("customerList :>> ", customerList);
+
   const dispatch = useDispatch();
 
   const storeUsersInRedux = () => {
@@ -55,7 +55,7 @@ const Customers = () => {
 
   useEffect(() => {
     storeUsersInRedux();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>

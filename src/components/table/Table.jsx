@@ -25,13 +25,11 @@ const Table = (props) => {
     const start = Number(props.limit) * page;
     const end = start + Number(props.limit);
 
-    console.log("props :>> ", props);
     setDataShow(props.bodyData.slice(start, end));
 
     setCurrPage(page);
   };
 
-  console.log("dataShow :>> ", dataShow);
   return (
     <div>
       <div className="table-wrapper">

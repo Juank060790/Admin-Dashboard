@@ -4,19 +4,18 @@ import faker from "faker";
 
 // Create a list of user using the above function and return it
 
-export const UserList = () => {
+export const ProductList = () => {
   const list = [];
   let index = 1;
   const user = () => {
     return {
       id: index++,
-      profilePicture: faker.image.avatar(),
-      name: faker.name.findName(),
-      email: faker.internet.email(),
-      phone: faker.phone.phoneNumber(),
-      total_order: faker.datatype.number({ min: 1, max: 300 }),
-      total_spend: faker.datatype.number({ min: 1, max: 300 }),
-      location: faker.address.city(),
+      category: faker.commerce.department(),
+      item: faker.commerce.productName(),
+      description: faker.commerce.productDescription(),
+      price: faker.commerce.price(),
+      in_stock: faker.datatype.number({ min: 1, max: 300 }),
+      item_sold: faker.datatype.number({ min: 1, max: 300 }),
     };
   };
 

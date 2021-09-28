@@ -34,22 +34,30 @@ const Layout = () => {
       {!isAuthenticated ? (
         <Route path="/" component={LoginPage}></Route>
       ) : (
-        <Route
-          path="/"
-          render={(props) => (
-            <div
-              className={`layout ${themeReducer.mode} ${themeReducer.color}`}
-            >
-              <Sidebar {...props} />
-              <div className="layout__content">
-                <TopNav />
-                <div className="layout__content-main">
-                  <Routes />
+        <>
+          <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
+            <div className="layout__content_TopNav">
+              <TopNav />
+            </div>
+          </div>
+
+          <Route
+            path="/"
+            render={(props) => (
+              <div
+                className={`layout ${themeReducer.mode} ${themeReducer.color}`}
+              >
+                <Sidebar {...props} />
+                <div className="layout__content">
+                  {/* <TopNav /> */}
+                  <div className="layout__content-main">
+                    <Routes />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        />
+            )}
+          />
+        </>
       )}
     </BrowserRouter>
   );

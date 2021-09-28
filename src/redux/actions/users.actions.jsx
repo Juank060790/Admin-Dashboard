@@ -1,7 +1,6 @@
 import * as types from "../constants/users.constants";
 
 const storeUsers = (users) => (dispatch) => {
-  console.log("usersDispatch :>> ", users);
   dispatch({
     type: types.STORE_USERS_REQUEST,
     payload: null,

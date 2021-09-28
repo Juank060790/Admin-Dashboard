@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./topnav.css";
 
@@ -10,10 +10,10 @@ import ThemeMenu from "../thememenu/ThemeMenu";
 
 import notifications from "../../assets/JsonData/notification.json";
 
-// import user_image from '../../assets/images/tuat.png'
-
 import user_menu from "../../assets/JsonData/user_menus.json";
+
 import { useDispatch } from "react-redux";
+
 import { logoutUser } from "../../redux/actions/auth.actions";
 
 const curr_user = {
@@ -23,8 +23,8 @@ const curr_user = {
 
 const renderNotificationItem = (item, index) => (
   <div className="notification-item" key={index}>
-    <i className={item.icon}></i>
-    <span>{item.content}</span>
+    <i className={item?.icon}></i>
+    <span>{item?.content}</span>
   </div>
 );
 
@@ -60,6 +60,11 @@ const renderUserMenu = (item, index, HandleLogOut) => {
 };
 
 const Topnav = () => {
+  useEffect(() => {
+    renderNotificationItem();
+    console.log("Topnav");
+  }, []);
+
   const dispatch = useDispatch();
   const HandleLogOut = () => {
     dispatch(logoutUser());
