@@ -1,0 +1,111 @@
+.modal-add-item {
+  min-width: var(--sidebar-width);
+  position: relative;
+  left: 0;
+  top: 0;
+  background-color: var(--main-bg);
+  box-shadow: var(--box-shadow);
+  margin: 20px;
+}
+
+.add-item-form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+}
+
+.item:hover {
+  color: var(--main-color);
+}
+
+.item.active {
+  border-radius: var(--border-radius);
+  background-image: linear-gradient(
+    to right,
+    var(--main-color),
+    var(--second-color)
+  );
+  color: var(--txt-white);
+}
+
+.item::before {
+  content: "";
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 50%;
+  background-image: linear-gradient(
+    to top right,
+    var(--main-color),
+    var(--second-color)
+  );
+  position: absolute;
+  left: -50%;
+  top: 0;
+  transform: scale(0);
+  transition: transform 0.8s ease 0s;
+}
+
+.item {
+  margin: 5px;
+  border: 1px solid var(--main-color);
+  opacity: 0.8;
+  border-radius: 5px;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item-inner {
+  margin: 10px;
+}
+
+.input-modal {
+  width: 100%;
+  height: 40px;
+  background-color: var(--main-bg);
+  color: var(--txt-light);
+  font-size: var(--font-size-xs);
+  padding: 0 10px;
+  outline: none;
+  transition: all 0.3s ease 0s;
+}
+
+.items-container {
+  display: flex;
+}
+
+.button-save {
+  width: 100%;
+  height: 40px;
+  background-color: var(--main-color);
+  color: var(--txt-white);
+  font-size: var(--font-size-xs);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.button-save:hover {
+  background-color: var(--second-color);
+}
+
+.button-cancel {
+  width: 100%;
+  height: 40px;
+  background-color: var(--main-bg);
+  color: var(--txt-light);
+  font-size: var(--font-size-xs);
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.button-cancel:hover {
+  color: var(--txt-white);
+}
