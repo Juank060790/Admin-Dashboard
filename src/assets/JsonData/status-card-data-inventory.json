@@ -1,12 +1,11 @@
 [
     {
         "icon": "bx bx-plus-circle",
-        "info": "Add Item"
+        "info": "Add Student"
     },
     {
-        "icon": "bx bx-cart",
-        "count": "2,001",
-        "title": "Daily visits"
+        "icon": "bx bx-package",
+        "title": "Students"
     },
     {
         "icon": "bx bx-dollar-circle",

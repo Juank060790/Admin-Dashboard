@@ -10,6 +10,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const loginError = useSelector((state) => state.auth.loginError);
 
   // eslint-disable-next-line
   const [errors, setErrors] = useState({
@@ -37,6 +38,11 @@ function LoginPage() {
           <p className="sign" align="center">
             Sign in
           </p>
+          {loginError ? (
+            <div className="error-message">
+              Password or username are incorrect
+            </div>
+          ) : null}
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="email-password-field">
               <input
@@ -61,6 +67,7 @@ function LoginPage() {
                 name="password"
               />
             </div>
+
             <input
               type="submit"
               className="submit"

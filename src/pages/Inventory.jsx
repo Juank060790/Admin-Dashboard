@@ -2,49 +2,88 @@ import React, { useState } from "react";
 
 import CardInventory from "../components/status-card/CardInventory";
 
-import statusCards from "../assets/JsonData/status-card-data-inventory.json";
+// import statusCards from "../assets/JsonData/status-card-data-inventory.json";
 import AddItemModal from "../components/modalAddItem/AddItemModal";
+import Studentlistpanel from "../components/studentList/StudentListPanel";
 
 // const renderCusomerHead = (item, index) => <th key={index}>{item}</th>;
 
-const Inventory = () => {
-  // Add a modal to add items into the inentory
-  const [inventoryModal, setInventoryModal] = useState(false);
-
-  if (inventoryModal) {
-    return (
+const AddStudent = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <h1>Add Items to Inventory</h1>
-        </div>
-        <AddItemModal />
-        <div>
-          <button onClick={() => setInventoryModal(false)}>Close</button>
+        <h1>Add Student</h1>
+      </div>
+
+      <AddItemModal />
+      <div>
+        <div className=" col-1">
+          <div className="item-inner"></div>
         </div>
       </div>
+    </div>
+  );
+};
+
+// Show panel from inventory
+const ShowPanel = (props) => {
+  console.log("showwww :>> ", props);
+  if (props.panelShow === "Products") {
+    return (
+      <>
+        <Studentlistpanel />{" "}
+      </>
     );
+  } else if (props.panelShow === "add-item") {
+    return (
+      <>
+        {" "}
+        <AddStudent />{" "}
+      </>
+    );
+  } else {
+    return null;
   }
+};
+
+const Inventory = () => {
+  // Add a modal to add items into the inentory
+  const [panelShow, setPanelShow] = useState("");
+  console.log("panelShow :>> ", panelShow);
+
+  const clickCard = (e) => {
+    setPanelShow(e.target.id);
+    console.log("e :>> ", e.target.id);
+  };
 
   return (
     <div>
-      <h2 className="page-header">Inventory</h2>
+      <h2 className="page-header">Students</h2>
       <div className="row">
-        <div className="col-6">
-          <div className="row">
-            {statusCards.map((item, index) => (
-              <div className="col-6" key={index}>
-                <CardInventory
-                  icon={item.icon}
-                  count={item.info}
-                  title={item.title}
-                  setInventoryModal={setInventoryModal}
-                />
-              </div>
-            ))}
+        <div className="col-2">
+          <div className="column">
+            <div className="">
+              <CardInventory
+                icon={"bx bx-plus-circle"}
+                title={"Add Student"}
+                clickCard={clickCard}
+                id={"add-item"}
+              />
+            </div>
+            <div className="">
+              <CardInventory
+                id={"Products"}
+                icon={"bx bx-list-ul"}
+                title={"Student Lists"}
+                clickCard={clickCard}
+              />
+            </div>
           </div>
         </div>
-        <div className="col-6">
-          <div className="card full-height"></div>
+        <div className="col-10">
+          <div className="card full-height">
+            <ShowPanel panelShow={panelShow} />
+          </div>
         </div>
         {/* <div className="col-4">
           <div className="card">

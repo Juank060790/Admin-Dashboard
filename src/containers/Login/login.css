@@ -61,10 +61,10 @@
   margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
 }
-
+/* 
 form.login-form {
   padding-top: 40px;
-}
+} */
 
 .pass {
   width: 80%;
@@ -119,4 +119,9 @@ form.login-form {
   .main {
     border-radius: 0px;
   }
+}
+
+.error-message {
+  text-align: center;
+  color: orangered;
 }

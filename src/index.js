@@ -11,12 +11,26 @@ import "./assets/css/index.css";
 import Layout from "./components/layout/Layout";
 import configureStore from "./redux/store";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const store = configureStore();
 
 document.title = "Shop Dashboard";
 
 ReactDOM.render(
   <Provider store={store}>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
     <Layout />
   </Provider>,
   document.getElementById("root")

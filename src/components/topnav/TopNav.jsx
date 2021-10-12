@@ -41,7 +41,7 @@ const renderUserMenu = (item, index, HandleLogOut) => {
   return (
     <>
       {item.content === "Logout" ? (
-        <Link to="/" key={index + 1}>
+        <Link to="/" key={index}>
           <div onClick={() => HandleLogOut()} className="notification-item">
             <i className={item.icon}></i>
             <span>{item.content}</span>

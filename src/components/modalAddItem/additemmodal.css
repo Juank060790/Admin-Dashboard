@@ -94,6 +94,7 @@
 }
 
 .button-cancel {
+  text-align: center;
   width: 100%;
   height: 40px;
   background-color: var(--main-bg);
@@ -107,5 +108,22 @@
 }
 
 .button-cancel:hover {
+  background-color: var(--main-color);
   color: var(--txt-white);
+}
+
+.text-area-inventory {
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: inherit;
+  margin-top: 10px;
+  padding: 10px 10px;
+  border: none;
+}
+.category-dropdown {
+  padding: 5px;
+}
+
+.category-dropdown-title {
+  margin: 5px;
 }

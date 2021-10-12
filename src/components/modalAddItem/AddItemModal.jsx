@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { productActions } from "../../redux/actions/product.actions";
+import courses from "../../assets/JsonData/courses.json";
 
 import "./additemmodal.css";
 
-const categories = {
-  1: "Food",
-  2: "Clothes",
-  3: "Electronics",
-  4: "Other",
-};
+const Dropdown = (props) => {
+  const changeSelect = (e) => {
+    props.setItemForm({
+      ...props.itemForm,
+      course: courses[e.target.value],
+    });
+  };
 
-const Dropdown = () => {
   return (
-    <select className="input-modal  modal-item-inner">
-      {Object.keys(categories).map((key) => {
+    <select
+      onChange={changeSelect}
+      name="category"
+      className="input-modal  modal-item-inner"
+      // required
+    >
+      {courses.map((course, index) => {
         return (
-          <option className="modal-item-inner" key={key} value={key}>
-            {categories[key]}
-          </option>
+          <>
+            {course.title}
+            <option
+              className="modal-item-inner"
+              key={index}
+              value={course.title}
+            >
+              {course.title}
+            </option>
+          </>
         );
       })}
     </select>
@@ -24,71 +39,161 @@ const Dropdown = () => {
 };
 
 const AddItemModal = () => {
+  const dispatch = useDispatch();
+
+  const [itemForm, setItemForm] = useState({
+    name: "",
+    phone_number: "",
+    birthdate: "",
+    email: "",
+    course: "",
+    start_date: "",
+  });
+
+  const handleChange = (e) =>
+    setItemForm({ ...itemForm, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (window.confirm("If all the information is correct continue")) {
+      dispatch(productActions.saveItemDataBase(itemForm));
+      // console.log("itemForm :>> ", itemForm);
+    }
+  };
+
+  const clearForm = () => {
+    setItemForm({
+      name: "",
+      phone_number: "",
+      birthdate: "",
+      email: "",
+      course: "",
+      date_created: "",
+      start_date: "",
+    });
+  };
+
   return (
     <div className="modal-add-item">
-      <form className="add-item-form">
+      <form onSubmit={handleSubmit} className="add-item-form">
         <div className="items-container">
-          <div className="item col-9">
+          <div className="item col-5">
             <div className="item-inner">
-              <div>Item name:</div>
+              <div>Student name:</div>
               <input
-                name="item"
+                // required
+                onChange={handleChange}
+                name="name"
                 className="input-modal"
                 type="text"
-                placeholder="Enter item name"
+                placeholder="Enter student name"
+              />
+            </div>
+          </div>
+          <div className="item col-4">
+            <div className="item-inner">
+              <div>Email addres</div>
+              <input
+                // required
+                onChange={handleChange}
+                name="email"
+                className="input-modal"
+                type="text"
+                placeholder="Email address"
+              />
+            </div>
+          </div>
+          <div className="item col-3">
+            <div className="item-inner">
+              <div>Birth date</div>
+              <input
+                // required
+                onChange={handleChange}
+                name="birthdate"
+                className="input-modal"
+                type="date"
+                placeholder="Birth date"
               />
             </div>
           </div>
           <div className="item">
             <div className="item-inner">
-              <label type="text" className="input-modal" for="category">
-                Choose a category:
-              </label>
-              <Dropdown />
+              <div>Phone Number:</div>
+
+              <input
+                onChange={handleChange}
+                name="phone_number"
+                className="input-symbol-euro modal-item-inner input-modal"
+                type="tel"
+                placeholder="Phone number"
+                // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                // required
+              />
             </div>
           </div>
         </div>
 
         <div className="items-container">
-          <div className="col-8 item">
+          <div className="item col-2 category-dropdown">
+            <div className="item-inner ">
+              <label
+                type="select"
+                className="input-modal category-dropdown-title"
+                htmlFor="course"
+              >
+                Course:
+              </label>
+              <Dropdown itemForm={itemForm} setItemForm={setItemForm} />
+            </div>
+          </div>
+          <div className="item col-3">
             <div className="item-inner">
-              <div>Description:</div>
+              <div>Start Date</div>
               <input
-                name="description"
-                className="modal-item-inner input-modal"
-                type="text"
-                placeholder="Description"
+                // required
+                onChange={handleChange}
+                name="start_date"
+                className="input-modal"
+                type="date"
+                placeholder="Start Date"
               />
             </div>
           </div>
-          <div className="item">
+          {/* <div className="col-10 item">
             <div className="item-inner">
-              <div>Price:</div>
-              <input
-                name="price"
-                className="modal-item-inner input-modal"
-                type="number"
-                placeholder="$"
+              <div>Comments:</div>
+              <textarea
+                rows="4"
+                cols="50"
+                onChange={handleChange}
+                name="comments"
+                className="modal-item-inner input-modal text-area-inventory"
+                // type="text"
+                placeholder="Enter extra comments"
+                // required
               />
             </div>
-          </div>
+          </div> */}
 
-          <div className="item">
+          {/* <div className="item">
             <div className="item-inner">
               <div>Item in stock:</div>
               <input
-                name="items_in_stock"
+                onChange={handleChange}
+                name="in_stock"
                 className="modal-item-inner input-modal"
-                type="text"
+                type="number"
                 placeholder="Items in stock"
+                // required
               />
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="items-container">
-          <div className="col-4">
-            <div className="item-inner">
+        <div className="items-container col-6 ">
+          <div className="col-3">
+            <div className="item-inner ">
               <input
+                onChange={handleChange}
                 className="button-save"
                 type="submit"
                 align="center"
@@ -96,15 +201,26 @@ const AddItemModal = () => {
               />
             </div>
           </div>
-          <div className=" col-4">
+          <div className="col-3 ">
             <div className="item-inner">
               <input
+                onChange={clearForm}
                 className="button-cancel"
-                type="submit"
+                // type="submit"
                 align="center"
                 value="Cancel"
               />
             </div>
+          </div>
+          <div className="col-7 ">
+            {/* <div className="item-inner">
+              <input
+                className="button-cancel"
+                type="submit"
+                align="center"
+                value="Upload Image {TODO}"
+              />
+            </div> */}
           </div>
         </div>
       </form>
